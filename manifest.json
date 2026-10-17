@@ -1,13 +1,20 @@
 
 {
-  "name": "Gym Split - Thailand 2027",
-  "short_name": "Gym Split",
-  "description": "Your 5-day gym split and Thailand 2027 transformation tracker.",
+  "name": "Grocotts Fitness",
+  "short_name": "Grocotts",
+  "description": "Grocotts Fitness - your Thailand 2027 gym transformation.",
   "start_url": "./Gym_Split_Thailand_2027_Enhanced.html",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#10151d",
-  "theme_color": "#10151d",
-  "icons": []
+  "background_color": "#111211",
+  "theme_color": "#111211",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
 }
