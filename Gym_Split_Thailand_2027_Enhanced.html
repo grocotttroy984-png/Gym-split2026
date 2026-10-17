@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#10151d">
+<title>Gym Split — Thailand 2027</title>
+<style>
+:root{color-scheme:dark;--bg:#10151d;--panel:#1a2330;--panel2:#222e3d;--text:#f4f7fb;--muted:#aab7c7;--accent:#8ce0c2;--line:#344254}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.45 system-ui,-apple-system,Segoe UI,sans-serif}
+header{padding:24px 18px 18px;background:linear-gradient(145deg,#1d3441,#10151d 72%);border-bottom:1px solid var(--line)}
+.eyebrow{color:var(--accent);font-size:.78rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
+h1{font-size:1.65rem;line-height:1.12;margin:8px 0}p{margin:7px 0;color:var(--muted)}
+main{max-width:760px;margin:auto;padding:16px 14px 40px}
+.tabs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;margin:2px 0 16px}
+.tab{padding:11px 3px;border:1px solid var(--line);border-radius:12px;background:var(--panel);color:var(--text);font-weight:750;font-size:.8rem}
+.tab[aria-selected=true]{background:var(--accent);color:#10221d;border-color:var(--accent)}
+.summary{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:14px 0}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px}
+.stat b{display:block;font-size:1.12rem}.stat span{font-size:.76rem;color:var(--muted)}
+.dayhead{display:flex;justify-content:space-between;gap:10px;align-items:start}
+h2{font-size:1.25rem;margin:8px 0 2px}.progress{color:var(--accent);font-weight:800;font-size:.9rem;white-space:nowrap;margin-top:12px}
+.exercise{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:14px;margin:10px 0}
+.ex-top{display:flex;gap:12px;align-items:start}
+.num{width:34px;height:34px;display:grid;place-items:center;border-radius:10px;background:var(--panel2);color:var(--accent);font-weight:850;flex-shrink:0}
+.ex-title{font-weight:800;font-size:1rem}.meta{font-size:.84rem;color:var(--muted);margin-top:3px}
+.details{margin:12px 0 0 46px}.details label{font-size:.8rem;color:var(--muted);display:block;margin-bottom:4px}
+.inputs{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+input[type=number],input[type=text]{width:100%;background:#0e141c;border:1px solid var(--line);border-radius:10px;padding:10px;color:var(--text);font:inherit}
+.checkrow{display:flex;gap:9px;align-items:center;margin-top:12px;color:var(--text);font-weight:650}
+input[type=checkbox]{width:21px;height:21px;accent-color:var(--accent)}
+a{color:var(--accent);font-weight:700;text-decoration:none}.demo{display:none}
+.demo-panel{margin:12px 0 0 46px;background:#101923;border:1px solid var(--line);border-radius:13px;padding:10px;display:flex;align-items:center;gap:12px;min-height:112px}
+.demo-art{width:118px;height:92px;flex:0 0 118px;background:linear-gradient(145deg,#1e3441,#111923);border-radius:10px;overflow:hidden}
+.demo-art svg{width:100%;height:100%;display:block}
+.demo-copy{font-size:.82rem;color:var(--muted)}.demo-copy b{display:block;color:var(--accent);font-size:.9rem;margin-bottom:3px}
+.person{stroke:#8ce0c2;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;fill:none}.head{fill:#8ce0c2}.machine{stroke:#71869a;stroke-width:4;stroke-linecap:round;fill:none}.weight{fill:#71869a}
+.armA{transform-origin:59px 43px;animation:armMove 1.8s ease-in-out infinite alternate}.armB{transform-origin:59px 43px;animation:armMove 1.8s ease-in-out infinite alternate-reverse}.legA{transform-origin:58px 57px;animation:legMove 1.8s ease-in-out infinite alternate}.legB{transform-origin:58px 57px;animation:legMove 1.8s ease-in-out infinite alternate-reverse}.bodyMove{transform-origin:58px 42px;animation:bodyMove 1.8s ease-in-out infinite alternate}.walkA{transform-origin:58px 56px;animation:walkA 1s ease-in-out infinite alternate}.walkB{transform-origin:58px 56px;animation:walkB 1s ease-in-out infinite alternate}
+@keyframes armMove{to{transform:rotate(-32deg)}}@keyframes legMove{to{transform:rotate(18deg)}}@keyframes bodyMove{to{transform:rotate(8deg)}}@keyframes walkA{to{transform:rotate(24deg)}}@keyframes walkB{to{transform:rotate(-24deg)}}
+@media(max-width:390px){.demo-panel{margin-left:0}.demo-art{width:100px;flex-basis:100px}}
+.note{background:#162b2a;border:1px solid #2d6154;border-radius:14px;padding:13px;margin:14px 0;color:#d7fff2;font-size:.9rem}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}
+button.action{background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:11px;padding:11px 14px;font-weight:750}
+button.primary{background:var(--accent);color:#10221d;border-color:var(--accent)}
+.small{font-size:.8rem;color:var(--muted)}
+.dashboard{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:14px;margin:14px 0}
+.dashboard h3{margin:0 0 8px;font-size:1rem}.dashgrid{display:grid;grid-template-columns:1fr 1fr;gap:9px}.dashgrid label{font-size:.8rem;color:var(--muted);display:block;margin-bottom:4px}.dash-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.timer{display:flex;align-items:center;justify-content:space-between;gap:12px;background:#162b2a;border:1px solid #2d6154;border-radius:14px;padding:12px;margin:14px 0}.timer strong{font-size:1.35rem;font-variant-numeric:tabular-nums}.timer-buttons{display:flex;gap:6px;flex-wrap:wrap}.timer-buttons button{padding:8px 10px}.weekbar{height:8px;border-radius:99px;background:#0e141c;overflow:hidden;margin:8px 0}.weekbar span{display:block;height:100%;background:var(--accent);width:0%;transition:width .2s}.coach{border:1px solid #5b4a2d;background:linear-gradient(130deg,#332b1e,#1a2330);border-radius:16px;padding:14px;margin:14px 0}.coach strong{color:#ffd58a}.coach p{margin-bottom:0}
+footer{max-width:760px;padding:0 18px 30px;margin:auto}
+@media(min-width:600px){header{padding:30px calc((100% - 720px)/2 + 18px)}main{padding-top:22px}.exercise{padding:17px}}
+</style>
+</head>
+<body>
+<header>
+ <div class="eyebrow">Your personal training companion</div>
+ <h1>Thailand 2027</h1>
+ <p>Build strength. Reduce body fat. Stay consistent.</p>
+ <div class="summary">
+  <div class="stat"><b>5 days</b><span>weekly plan</span></div>
+  <div class="stat"><b>2–3</b><span>reps left in reserve</span></div>
+  <div class="stat"><b>0 £</b><span>app cost</span></div>
+ </div>
+</header>
+<main>
+ <div class="tabs" role="tablist" aria-label="Workout days">
+  <button class="tab" data-day="0" aria-selected="true">Mon</button><button class="tab" data-day="1" aria-selected="false">Tue</button><button class="tab" data-day="2" aria-selected="false">Wed</button><button class="tab" data-day="3" aria-selected="false">Thu</button><button class="tab" data-day="4" aria-selected="false">Fri</button>
+ </div>
+ <div class="dayhead"><div><h2 id="dayTitle">Monday — Upper A</h2><p id="daySubtitle">Weights first, then incline treadmill.</p></div><div class="progress" id="progress">0 / 6 done</div></div>
+ <div class="note" id="dayNote">Warm up with 5 minutes easy treadmill. Rest 60–120 seconds between sets. Choose a weight that leaves 2–3 good reps in reserve.</div>
+ <section class="dashboard" aria-label="Progress tracker">
+  <h3>📈 Transformation tracker</h3><p class="small">Optional check-ins. Save your weight and waist measurement to see your trend over time.</p>
+  <div class="dashgrid"><div><label for="bodyWeight">Body weight (kg)</label><input id="bodyWeight" type="number" min="30" max="300" step="0.1" placeholder="e.g. 85.2"></div><div><label for="waist">Waist (cm)</label><input id="waist" type="number" min="30" max="250" step="0.5" placeholder="e.g. 92"></div></div>
+  <div class="dash-actions"><button class="action primary" id="saveCheckin">Save check-in</button><button class="action" id="showHistory">Show history</button></div><p class="small" id="checkinStatus" aria-live="polite">No check-in saved yet.</p><div id="historyBox" class="small" hidden></div>
+ </section>
+ <div class="coach"><strong>🤖 COACH MODE: TERMINATOR TRAINING PROTOCOL</strong><p id="coachLine">“Strength comes from consistency. Complete the next set with control.” Start lighter than you think and build up safely.</p><div class="dash-actions"><button class="action" id="coachMotivate">Give me a boost</button></div></div>
+ <div class="timer"><div><div class="small">REST TIMER</div><strong id="timerDisplay">01:30</strong><div class="small" id="timerStatus">Ready when you are</div></div><div class="timer-buttons"><button class="action" id="timer30">30s</button><button class="action" id="timer60">60s</button><button class="action primary" id="timer90">90s</button><button class="action" id="timerStop">Stop</button></div></div>
+ <section id="workout"></section>
+ <div class="actions"><button class="action primary" id="resetDay">Reset today's ticks</button><button class="action" id="export">Export my log</button></div>
+ <div class="weekbar" aria-label="Today completion"><span id="weekFill"></span></div><p class="small">Your ticks, weights and check-ins are saved in this browser on this device. Export a backup now and then. Exercise illustrations are simplified movement guides, not exact demonstrations.</p>
+</main>
+<footer><p class="small">Start conservatively for the first 1–2 weeks. If you're unusually sore or run down, reduce the session rather than forcing it. Wednesday is cardio and mobility, not a second hard leg day.</p></footer>
+<script>
+const days=[
+ {title:"Monday — Upper A",subtitle:"Upper body strength + cardio",note:"Warm up with 5 minutes easy treadmill. Rest 60–120 seconds. Finish with 20–40 minutes incline treadmill.",items:[
+ ["Seated chest press","2 × 8–12","Chest","seated chest press machine exercise demonstration"],
+ ["Lat pulldown","2 × 8–12","Back","lat pulldown machine proper form demonstration"],
+ ["Seated cable row","2 × 10–12","Back","seated cable row proper form demonstration"],
+ ["Shoulder press machine","2 × 8–12","Shoulders","shoulder press machine proper form demonstration"],
+ ["Biceps curl machine","2 × 10–15","Biceps","biceps curl machine exercise demonstration"],
+ ["Incline treadmill","20–40 min","Cardio","incline treadmill walking workout demonstration"]]},
+ {title:"Tuesday — Lower A + Abs",subtitle:"Legs, calves and core",note:"Warm up with 5 minutes easy treadmill. Rest 60–120 seconds. Finish with 15–30 minutes incline treadmill.",items:[
+ ["Leg press","2 × 10–12","Legs","leg press machine proper form demonstration"],
+ ["Seated leg curl","2 × 10–15","Hamstrings","seated leg curl machine demonstration"],
+ ["Leg extension","2 × 10–15","Quads","leg extension machine proper form demonstration"],
+ ["Calf raises","2 × 12–15","Calves","standing or seated calf raise machine demonstration"],
+ ["Ab crunch machine","2 × 12–15","Abs","abdominal crunch machine proper form demonstration"],
+ ["Incline treadmill","15–30 min","Cardio","incline treadmill walking workout demonstration"]]},
+ {title:"Wednesday — Cardio + Mobility",subtitle:"Keep it manageable and build the habit",note:"30–60 minutes incline treadmill at a pace you can sustain, then 5 minutes gentle stretching. Shorten it if needed.",items:[
+ ["Incline treadmill walk","30–60 min","Cardio","incline treadmill walking workout demonstration"],
+ ["Gentle stretching","5 min","Mobility","simple full body stretching routine beginner"]]},
+ {title:"Thursday — Upper B",subtitle:"Upper body variation + cardio",note:"Warm up with 5 minutes easy treadmill. Rest 60–120 seconds. Finish with 20–40 minutes incline treadmill.",items:[
+ ["Incline chest press machine","2 × 8–12","Chest","incline chest press machine proper form demonstration"],
+ ["Lat pulldown","2 × 8–12","Back","lat pulldown machine proper form demonstration"],
+ ["Reverse pec deck","2 × 12–15","Rear shoulders","reverse pec deck machine proper form demonstration"],
+ ["Lateral raise machine","2 × 12–15","Shoulders","lateral raise machine proper form demonstration"],
+ ["Triceps cable pushdown","2 × 10–15","Triceps","triceps cable pushdown proper form demonstration"],
+ ["Incline treadmill","20–40 min","Cardio","incline treadmill walking workout demonstration"]]},
+ {title:"Friday — Lower B + Abs",subtitle:"Legs, glutes and core",note:"Warm up with 5 minutes easy treadmill. Rest 60–120 seconds. Finish with 15–30 minutes incline treadmill.",items:[
+ ["Leg press","2 × 10–12","Legs","leg press machine proper form demonstration"],
+ ["Seated leg curl","2 × 10–15","Hamstrings","seated leg curl machine demonstration"],
+ ["Hip abductor machine","2 × 12–15","Glutes","hip abductor machine proper form demonstration"],
+ ["Calf raises","2 × 12–15","Calves","standing or seated calf raise machine demonstration"],
+ ["Ab crunch machine","2 × 12–15","Abs","abdominal crunch machine proper form demonstration"],
+ ["Incline treadmill","15–30 min","Cardio","incline treadmill walking workout demonstration"]]}
+];
+let current=0;
+let timerInterval=null,timerRemaining=90;
+const key=(d,i,s)=>`thailand2027-${d}-${i}-${s}`;
+function saved(k){try{return localStorage.getItem(k)||""}catch(e){return""}}
+function save(k,v){try{localStorage.setItem(k,v)}catch(e){}}
+function animationTip(name){
+ const n=name.toLowerCase();
+ if(n.includes("treadmill")) return "Walk steadily with an upright posture and controlled steps.";
+ if(n.includes("stretch")) return "Move gently and stay within a comfortable range.";
+ if(n.includes("press") && n.includes("chest")) return "Press forward smoothly; keep shoulders down.";
+ if(n.includes("shoulder press")) return "Press overhead without arching your lower back.";
+ if(n.includes("pulldown")) return "Pull elbows down toward your sides; avoid swinging.";
+ if(n.includes("row")) return "Pull toward your torso and squeeze your shoulder blades.";
+ if(n.includes("curl")) return "Bend at the elbow while keeping upper arms steady.";
+ if(n.includes("pushdown")) return "Extend your elbows while keeping them tucked in.";
+ if(n.includes("leg press")) return "Lower under control, then press without locking your knees.";
+ if(n.includes("leg extension")) return "Straighten your knees smoothly; lower slowly.";
+ if(n.includes("leg curl")) return "Curl your heels back, then return slowly.";
+ if(n.includes("calf")) return "Rise onto your toes, pause, then lower your heels.";
+ if(n.includes("crunch")) return "Curl your ribs toward your hips; avoid pulling your neck.";
+ if(n.includes("abductor")) return "Move your knees outward slowly, then return with control.";
+ if(n.includes("pec deck")) return "Move through a comfortable range and control the return.";
+ if(n.includes("lateral raise")) return "Lift out to the sides with soft elbows; avoid shrugging.";
+ return "Move smoothly, stay controlled, and avoid using momentum.";
+}
+function animationSvg(name){
+ const n=name.toLowerCase();
+ let type="arms";
+ if(n.includes("treadmill")) type="walk";
+ else if(n.includes("stretch")) type="stretch";
+ else if(n.includes("leg press")||n.includes("leg extension")||n.includes("leg curl")||n.includes("calf")||n.includes("abductor")) type="legs";
+ else if(n.includes("crunch")) type="crunch";
+ else if(n.includes("curl")) type="curl";
+ else if(n.includes("pulldown")||n.includes("row")||n.includes("pushdown")) type="pull";
+ const moving = type==="walk" ? `<g class="bodyMove"><circle class="head" cx="58" cy="21" r="7"/><path class="person" d="M58 30 L58 53"/><path class="person walkA" d="M58 35 L42 45 L34 39"/><path class="person walkB" d="M58 35 L73 44 L81 39"/><path class="person walkA" d="M58 53 L43 70 L37 79"/><path class="person walkB" d="M58 53 L72 67 L82 74"/></g>` : type==="legs" ? `<path class="machine" d="M15 75 H104 M24 27 V75 M24 27 H42 M85 24 V75"/><rect class="weight" x="15" y="35" width="10" height="22" rx="2"/><g class="bodyMove"><circle class="head" cx="49" cy="34" r="7"/><path class="person" d="M51 43 L62 54 L76 54"/><path class="person armA" d="M54 44 L69 42 L78 46"/><path class="person legA" d="M62 54 L45 67 L36 67"/><path class="person legB" d="M62 54 L79 66 L89 66"/></g>` : type==="crunch" ? `<path class="machine" d="M20 75 H100 M27 67 L40 50 M40 50 L54 65"/><g class="bodyMove"><circle class="head" cx="51" cy="43" r="7"/><path class="person" d="M57 48 Q71 53 64 65 L52 70"/><path class="person" d="M61 54 L73 58 M52 70 L70 74"/></g>` : type==="stretch" ? `<circle class="head" cx="58" cy="20" r="7"/><path class="person" d="M58 29 L58 55 M58 35 L39 23 M58 35 L78 23 M58 55 L44 76 M58 55 L73 76"/><path class="machine" d="M18 80 H98"/>` : type==="curl" ? `<circle class="head" cx="58" cy="21" r="7"/><path class="person" d="M58 30 L58 56 M58 37 L42 48"/><g class="armA"><path class="person" d="M58 37 L74 49 L74 34"/><rect class="weight" x="67" y="27" width="15" height="5" rx="2"/></g><path class="person" d="M58 56 L47 78 M58 56 L70 78"/>` : type==="pull" ? `<path class="machine" d="M27 13 V77 M27 13 H88 M88 13 V28"/><path class="machine" d="M58 13 V27"/><circle class="head" cx="58" cy="34" r="7"/><path class="person" d="M58 43 L58 59 M58 59 L47 78 M58 59 L69 78"/><g class="armA"><path class="person" d="M58 45 L43 34 L43 23"/></g><g class="armB"><path class="person" d="M58 45 L73 34 L73 23"/></g>` : `<path class="machine" d="M22 71 H98 M29 67 V76 M91 67 V76"/><circle class="head" cx="58" cy="21" r="7"/><path class="person" d="M58 30 L58 56 M58 56 L47 78 M58 56 L70 78"/><g class="armA"><path class="person" d="M58 37 L39 47 L34 36"/><rect class="weight" x="28" y="28" width="12" height="5" rx="2"/></g><g class="armB"><path class="person" d="M58 37 L77 47 L82 36"/><rect class="weight" x="76" y="28" width="12" height="5" rx="2"/></g>`;
+ return `<svg viewBox="0 0 118 92" role="img" aria-label="Animated simplified ${type} movement"><path d="M0 82 H118" stroke="#344254" stroke-width="1"/>${moving}</svg>`;
+}
+
+function render(){
+ const d=days[current];document.getElementById("dayTitle").textContent=d.title;document.getElementById("daySubtitle").textContent=d.subtitle;document.getElementById("dayNote").textContent=d.note;
+ document.querySelectorAll(".tab").forEach((b,i)=>b.setAttribute("aria-selected",i===current?"true":"false"));
+ const host=document.getElementById("workout");host.innerHTML="";
+ d.items.forEach((x,i)=>{
+  const done=saved(key(current,i,"done"))==="1",weight=saved(key(current,i,"weight")),reps=saved(key(current,i,"reps"));
+  const el=document.createElement("article");el.className="exercise";
+  el.innerHTML=`<div class="ex-top"><div class="num">${i+1}</div><div><div class="ex-title">${x[0]}</div><div class="meta">${x[1]} · ${x[2]}</div></div></div>
+  <div class="details"><div class="inputs"><div><label for="w${i}">Weight (kg, optional)</label><input id="w${i}" type="text" inputmode="decimal" placeholder="e.g. 20" value="${weight.replace(/&/g,"&amp;").replace(/"/g,"&quot;")}"></div><div><label for="r${i}">Reps / notes</label><input id="r${i}" type="text" placeholder="e.g. 10, 10" value="${reps.replace(/&/g,"&amp;").replace(/"/g,"&quot;")}"></div></div>
+  <label class="checkrow"><input id="c${i}" type="checkbox" ${done?"checked":""}> Mark complete</label>
+  <div class="demo-panel"><div class="demo-art">${animationSvg(x[0])}</div><div class="demo-copy"><b>↻ Movement animation</b>${animationTip(x[0])}<br><span>Looping guide · simplified illustration</span></div></div></div>`;
+  host.appendChild(el);
+  el.querySelector(`#w${i}`).addEventListener("input",e=>save(key(current,i,"weight"),e.target.value));
+  el.querySelector(`#r${i}`).addEventListener("input",e=>save(key(current,i,"reps"),e.target.value));
+  el.querySelector(`#c${i}`).addEventListener("change",e=>{save(key(current,i,"done"),e.target.checked?"1":"0");updateProgress()});
+ });
+ updateProgress();
+}
+function updateProgress(){const d=days[current],n=d.items.filter((_,i)=>saved(key(current,i,"done"))==="1").length;document.getElementById("progress").textContent=`${n} / ${d.items.length} done`;document.getElementById("weekFill").style.width=`${Math.round(n/d.items.length*100)}%`}
+function fmtTime(n){return `${String(Math.floor(n/60)).padStart(2,"0")}:${String(n%60).padStart(2,"0")}`}
+function stopTimer(){if(timerInterval){clearInterval(timerInterval);timerInterval=null}document.getElementById("timerStatus").textContent="Paused / ready"}
+function startTimer(seconds){stopTimer();timerRemaining=seconds;document.getElementById("timerDisplay").textContent=fmtTime(timerRemaining);document.getElementById("timerStatus").textContent="Resting…";timerInterval=setInterval(()=>{timerRemaining--;document.getElementById("timerDisplay").textContent=fmtTime(Math.max(0,timerRemaining));if(timerRemaining<=0){stopTimer();document.getElementById("timerStatus").textContent="Rest finished — next set!";document.getElementById("timerDisplay").textContent="00:00";try{navigator.vibrate?.([180,80,180])}catch(e){}}},1000)}
+function loadCheckin(){document.getElementById("bodyWeight").value=saved("thailand2027-checkin-weight");document.getElementById("waist").value=saved("thailand2027-checkin-waist");const h=saved("thailand2027-checkin-history");document.getElementById("checkinStatus").textContent=h?`${JSON.parse(h).length} check-in(s) saved on this device.`:"No check-in saved yet."}
+document.getElementById("saveCheckin").addEventListener("click",()=>{const w=document.getElementById("bodyWeight").value,wa=document.getElementById("waist").value;if(!w&&!wa){document.getElementById("checkinStatus").textContent="Enter weight or waist first.";return}const raw=saved("thailand2027-checkin-history");let arr=[];try{arr=JSON.parse(raw)||[]}catch(e){}const item={date:new Date().toLocaleDateString("en-GB"),weight:w||"—",waist:wa||"—"};arr.push(item);save("thailand2027-checkin-history",JSON.stringify(arr));save("thailand2027-checkin-weight",w);save("thailand2027-checkin-waist",wa);loadCheckin();document.getElementById("checkinStatus").textContent=`Saved ${item.date}: ${item.weight} kg · waist ${item.waist} cm`});
+document.getElementById("showHistory").addEventListener("click",()=>{const box=document.getElementById("historyBox");box.hidden=!box.hidden;if(!box.hidden){let a=[];try{a=JSON.parse(saved("thailand2027-checkin-history")||"[]")}catch(e){}box.textContent=a.length?a.slice(-10).reverse().map(x=>`${x.date} — ${x.weight} kg · ${x.waist} cm`).join("\n"):"No history yet.";box.style.whiteSpace="pre-line"}});
+document.getElementById("timer30").addEventListener("click",()=>startTimer(30));document.getElementById("timer60").addEventListener("click",()=>startTimer(60));document.getElementById("timer90").addEventListener("click",()=>startTimer(90));document.getElementById("timerStop").addEventListener("click",stopTimer);
+const coachLines=["“Strength comes from consistency. Complete the next set with control.”","“No shortcuts. Good reps, steady progress.”","“You don't need a perfect session. You need to keep showing up.”","“Control the weight. Don't let the weight control you.”","“Thailand 2027 is the target. Today's session is the job.”"];
+document.getElementById("coachMotivate").addEventListener("click",()=>{const el=document.getElementById("coachLine");let next=el.dataset.last||-1;next=(Number(next)+1)%coachLines.length;el.dataset.last=next;el.textContent=coachLines[next]});
+document.querySelectorAll(".tab").forEach(b=>b.addEventListener("click",()=>{current=Number(b.dataset.day);render()}));
+document.getElementById("resetDay").addEventListener("click",()=>{if(confirm("Clear this day's completion ticks? Your weight and rep notes will stay.")){days[current].items.forEach((_,i)=>save(key(current,i,"done"),"0"));render()}});
+document.getElementById("export").addEventListener("click",()=>{let out="Thailand 2027 Gym Log\n\n";days.forEach((d,di)=>{out+=d.title+"\n";d.items.forEach((x,i)=>{out+=`${saved(key(di,i,"done"))==="1"?"[x]":"[ ]"} ${x[0]} — ${x[1]} | Weight: ${saved(key(di,i,"weight"))||"-"} kg | Reps/notes: ${saved(key(di,i,"reps"))||"-"}\n`});out+="\n"});out+="Check-ins\n"+saved("thailand2027-checkin-history")+"\n";const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([out],{type:"text/plain"}));a.download="thailand-2027-gym-log.txt";a.click();URL.revokeObjectURL(a.href)});
+loadCheckin();
+render();
+</script>
+</body>
+</html>
