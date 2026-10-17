@@ -1,0 +1,13 @@
+
+{
+  "name": "Gym Split - Thailand 2027",
+  "short_name": "Gym Split",
+  "description": "Your 5-day gym split and Thailand 2027 transformation tracker.",
+  "start_url": "./Gym_Split_Thailand_2027_Enhanced.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#10151d",
+  "theme_color": "#10151d",
+  "icons": []
+}
